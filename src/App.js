@@ -10,7 +10,8 @@ class App extends Component{
       {name:'george',count:30},
       {name:'hunery',count:22},
       {name:'ada',count:11},
-    ]
+    ],
+    showPersons: false
   }
   switchHandler = (c) => {
     this.setState({
@@ -33,6 +34,19 @@ class App extends Component{
       ]
     })
   }
+  togglePerspons = () =>{
+    let showP = this.state.showPersons;
+    console.log(showP)
+    this.setState({
+      persons:[
+        {name: 'newval',count:50},
+        {name: 'georges',count:320},
+        {name: 'hunery',count:221},
+        {name: 'ada',count:111},
+      ],
+      showPersons: !showP
+    })
+  }
   render(){
     let persons =  this.state.persons;
     let personRender = persons.map((item, index)=>{
@@ -42,8 +56,8 @@ class App extends Component{
       <div className="App">
         <span>testing</span>
         {/* <button onClick = {()=>{this.switchHandler('ccc')}}>changes</button> */}
-        <button onClick = {this.switchHandler.bind(this,'missu')}>changes</button>
-        { personRender }
+        <button onClick = {this.togglePerspons}>changes</button>
+        {this.state.showPersons ? personRender :null }
        
         
       </div>
