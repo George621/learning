@@ -6,51 +6,68 @@ import './App.css';
 class App extends Component{
   state = {
     persons:[
-      {name:'mis wu',count:50},
-      {name:'george',count:30},
-      {name:'hunery',count:22},
-      {name:'ada',count:11},
+      {id:1,name:'mis wu',count:50},
+      {id:2,name:'george',count:30},
+      {id:3,name:'hunery',count:22},
+      {id:4,name:'ada',count:11},
     ],
     showPersons: false
   }
   switchHandler = (c) => {
     this.setState({
       persons:[
-        {name:c,count:50},
-        {name:'georges',count:320},
-        {name:'hunery',count:221},
-        {name:'ada',count:111},
+      {id:1,name:'mis wu',count:50},
+      {id:2,name:'george',count:30},
+      {id:3,name:'hunery',count:22},
+      {id:4,name:'ada',count:11},
       ]
     })
   }
-  nameChangeHandler = (event) => {
-    let newval =  event.target.value
+  nameChangeHandler = (event,id) => {
+    let newval =  event.target.value;
+    let getPersons = this.state.persons;
+    const personIndex = getPersons.findIndex((p)=>{
+      return p.id === id
+    })
+    const person = {
+      ...getPersons[personIndex]
+    }
+    person.name = newval;
+    const persons = [...getPersons]
+    persons[personIndex] = person
     this.setState({
-      persons:[
-        {name: newval,count:50},
-        {name: 'georges',count:320},
-        {name: 'hunery',count:221},
-        {name: 'ada',count:111},
-      ]
+      persons: persons
     })
   }
   togglePerspons = () =>{
     let showP = this.state.showPersons;
-    console.log(showP)
     this.setState({
       persons:[
-        {name: 'newval',count:50},
-        {name: 'georges',count:320},
-        {name: 'hunery',count:221},
-        {name: 'ada',count:111},
+        {id:1,name:'mis wu',count:50},
+        {id:2,name:'george',count:30},
+        {id:3,name:'hunery',count:22},
+        {id:4,name:'ada',count:11},
       ],
       showPersons: !showP
+    })
+  }
+  deletePersonHandler = (personIndex)=>{
+    // const persons = this.state.persons;
+    const persons = [...this.state.persons]
+    persons.splice(personIndex,1)
+    this.setState({
+      persons: persons
     })
   }
   render(){
     let persons =  this.state.persons;
     let personRender = persons.map((item, index)=>{
-      return <Person changed = {this.nameChangeHandler} name = {item.name} key={index} count = {item.count} />
+      return <Person 
+      myClick={this.deletePersonHandler.bind(this,index)}
+      changed = {(event)=>{this.nameChangeHandler(event,item.id)}}
+      name = {item.name} 
+      key={item.id} 
+      count = {item.count} />
     })
     return (
       <div className="App">
