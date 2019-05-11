@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import Person from './components/Person/Person'
+import Persons from './components/Persons/Persons'
+import MyHeader from './components/Header/Header'
 import './App.css';
 
 class App extends Component{
@@ -60,23 +61,20 @@ class App extends Component{
     })
   }
   render(){
-    let persons =  this.state.persons;
-    let personRender = persons.map((item, index)=>{
-      return <Person 
-      myClick={this.deletePersonHandler.bind(this,index)}
-      changed = {(event)=>{this.nameChangeHandler(event,item.id)}}
-      name = {item.name} 
-      key={item.id} 
-      count = {item.count} />
-    })
+
+    let PersonsTag = <Persons 
+    persons = {this.state.persons}
+    clicked = {this.deletePersonHandler}
+    changed = {this.nameChangeHandler}
+    />
     return (
       <div className="App">
-        <span>testing</span>
-        {/* <button onClick = {()=>{this.switchHandler('ccc')}}>changes</button> */}
-        <button onClick = {this.togglePerspons}>changes</button>
-        {this.state.showPersons ? personRender :null }
-       
-        
+        <MyHeader
+          showPersons = {this.state.showPersons} 
+          togglePerspons = {this.togglePerspons} 
+          persons = {this.state.persons}
+        />
+        { this.state.showPersons && PersonsTag }
       </div>
     );
   }
