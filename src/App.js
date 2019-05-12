@@ -70,6 +70,7 @@ class App extends Component{
     return (
       <div className="App">
         <MyHeader
+          appTitle = {this.props.title}
           showPersons = {this.state.showPersons} 
           togglePerspons = {this.togglePerspons} 
           persons = {this.state.persons}

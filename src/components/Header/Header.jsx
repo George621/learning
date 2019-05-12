@@ -11,7 +11,7 @@ const MyHeader = (props) => {
       classes.push('blod')
     }
   return <div className='Header'>
-    <span>testing</span>
+    <span>{props.appTitle}</span>
     <p className={classes.join(' ')}>hello react app</p>
     <button className={props.showPersons? 'blod' : ''} onClick = {props.togglePerspons}>changes</button>
   </div>
