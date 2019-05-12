@@ -5,15 +5,20 @@ import MyHeader from './components/Header/Header'
 import './App.css';
 
 class App extends Component{
-  state = {
-    persons:[
-      {id:1,name:'mis wu',count:50},
-      {id:2,name:'george',count:30},
-      {id:3,name:'hunery',count:22},
-      {id:4,name:'ada',count:11},
-    ],
-    showPersons: false
+  constructor(props){
+    super(props)
+
+    this.state = {
+      persons:[
+        {id:1,name:'mis wu',count:50},
+        {id:2,name:'george',count:30},
+        {id:3,name:'hunery',count:22},
+        {id:4,name:'ada',count:11},
+      ],
+      showPersons: false
+    }
   }
+  
   switchHandler = (c) => {
     this.setState({
       persons:[
